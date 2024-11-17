@@ -32,6 +32,17 @@
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/custom.css') }}">
+
+    <style>
+        *{
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        @font-face{
+            font-family: 'Tajawal';
+            src: url('{{ asset('assets/admin/fonts/Tajawal/Tajawal-Regular.ttf') }}');
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -40,10 +51,8 @@
         <!-- Navbar -->
         @include('admin.layouts.header')
         <!-- /.navbar -->
-
         <!-- Main Sidebar Container -->
         @include('admin.layouts.sidebar')
-
         <!-- Content Wrapper. Contains page content -->
         @include('admin.layouts.content')
         <!-- /.content-wrapper -->
