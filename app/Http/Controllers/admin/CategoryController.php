@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\CategoryModel;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class CategoryController extends Controller
         return view('admin.category.add');
     }
 
-    public function create(Request $request)
+    public function create(CategoryRequest $request)
     {
         $data = new CategoryModel();
         $data->category_name = $request->category_name;
@@ -34,7 +35,7 @@ class CategoryController extends Controller
         return view('admin.category.edit',['data'=>$data]);
     }
 
-    public function update(Request $request)
+    public function update(CategoryRequest $request)
     {
         $data = CategoryModel::where('id',$request->id)->first();
         $data->category_name = $request->category_name;

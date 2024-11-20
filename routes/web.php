@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
         Route::get('add', [App\Http\Controllers\admin\UserController::class, 'add'])->name('admin.users.add');
         Route::post('create', [App\Http\Controllers\admin\UserController::class, 'create'])->name('admin.users.create');
         Route::get('edit/{id}', [App\Http\Controllers\admin\UserController::class, 'edit'])->name('admin.users.edit');
-        Route::post('update', [App\Http\Controllers\admin\UserController::class, 'update'])->name('admin.users.update');
+        Route::put('update', [App\Http\Controllers\admin\UserController::class, 'update'])->name('admin.users.update');
     });
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [App\Http\Controllers\admin\CategoryController::class, 'index'])->name('admin.category.index');
@@ -36,6 +36,13 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
         Route::post('/create', [App\Http\Controllers\admin\CategoryController::class, 'create'])->name('admin.category.create');
         Route::get('/edit/{id}', [App\Http\Controllers\admin\CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::post('/update', [App\Http\Controllers\admin\CategoryController::class, 'update'])->name('admin.category.update');
+    });
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/index', [App\Http\Controllers\admin\ProductController::class, 'index'])->name('admin.products.index');
+        Route::get('/add', [App\Http\Controllers\admin\ProductController::class, 'add'])->name('admin.products.add');
+        Route::post('/create', [App\Http\Controllers\admin\ProductController::class, 'create'])->name('admin.products.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\admin\ProductController::class, 'edit'])->name('admin.products.edit');
+        Route::post('/update', [App\Http\Controllers\admin\ProductController::class, 'update'])->name('admin.products.update');
     });
 });
 

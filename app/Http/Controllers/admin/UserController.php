@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class UserController extends Controller
         return view('admin.users.add');
     }
 
-    public function create(Request $request){
+    public function create(UserRequest $request){
         $data = new User();
         $data->name = $request->name;
         $data->email = $request->email;
@@ -38,7 +39,7 @@ class UserController extends Controller
         return view('admin.users.edit',['data'=>$data]);
     }
 
-    public function update(Request $request){
+    public function update(UserRequest $request){
         $data = User::where('id',$request->id)->first();
         $data->name = $request->name;
         $data->email = $request->email;

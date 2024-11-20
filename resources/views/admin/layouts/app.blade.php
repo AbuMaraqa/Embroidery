@@ -43,6 +43,8 @@
             src: url('{{ asset('assets/admin/fonts/Tajawal/Tajawal-Regular.ttf') }}');
         }
     </style>
+
+    @yield('style')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -103,6 +105,8 @@
     <script src="{{ asset('assets/admin/dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/admin/dist/js/demo.js') }}"></script>
+
+    @yield('script')
 </body>
 
 </html>

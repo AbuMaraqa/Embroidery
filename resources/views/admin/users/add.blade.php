@@ -10,53 +10,65 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">اسم المستخدم</label>
-                                    <input type="text" name="name" placeholder="اسم المستخدم" class="form-control">
+                                    <input type="text" value="{{ old('name')}}" name="name" placeholder="اسم المستخدم" class="form-control">
+                                    @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">البريد الالكتروني</label>
-                                    <input type="email" name="email" placeholder="البريد الالكتروني" class="form-control">
+                                    <input type="email" value="{{ old('email')}}" name="email" placeholder="البريد الالكتروني" class="form-control">
+                                    @error('email')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">كلمة المرور</label>
                                     <input type="text" name="password" placeholder="كلمة المرور" class="form-control">
+                                    @error('password')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">رقم الهاتف</label>
-                                    <input type="text" name="phone" placeholder="رقم الهاتف" class="form-control">
+                                    <input type="text" value="{{ old('phone')}}" name="phone" placeholder="رقم الهاتف" class="form-control">
+                                    @error('phone')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">تاريخ الميلاد</label>
+                                    <input type="date" value="{{ old('dob')}}" name="dob" placeholder="تاريخ الميلاد" class="form-control">
+                                    @error('dob')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">نوع المتسخدم</label>
                                     <select class="form-control" name="user_role" id="">
-                                        <option value="admin">ادمن</option>
-                                        <option value="embroider">مطرز</option>
-                                        <option value="client">عميل</option>
+                                        <option @if (old('user_role') == 'admin')
+                                            selected
+                                        @endif value="admin">ادمن</option>
+                                        <option @if (old('user_role') == 'embroider')
+                                        selected
+                                    @endif value="embroider">مطرز</option>
+                                        <option @if (old('user_role') == 'client')
+                                        selected
+                                    @endif value="client">عميل</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">رقم بطاقة العميل</label>
-                                    <input type="text" name="num_of_card" placeholder="رقم بطاقة العميل" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">العنوان</label>
-                                    <textarea class="form-control" name="address" placeholder="العنوان" name="" id="" cols="30" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">معلومات عن العميل</label>
-                                    <textarea class="form-control" name="information" placeholder="معلومات عن العميل" name="" id="" cols="30" rows="3"></textarea>
+                                    @error('user_role')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">

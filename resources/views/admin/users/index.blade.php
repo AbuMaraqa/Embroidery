@@ -32,6 +32,7 @@
                                         <tr>
                                             <th>الاسم</th>
                                             <th>البريد الالكتروني</th>
+                                            <th>نوع المستخدم</th>
                                             <th style="width: 100px" class="text-center">العمليات</th>
                                         </tr>
                                     </thead>
@@ -40,6 +41,15 @@
                                             <tr>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
+                                                <td>
+                                                    @if ($user->user_role == 'admin')
+                                                        ادمن
+                                                        @elseif ($user->user_role == 'embroider')
+                                                        مطرز
+                                                        @else
+                                                        عميل
+                                                    @endif
+                                                </td>
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.users.edit',['id'=>$user->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
                                                 </td>
