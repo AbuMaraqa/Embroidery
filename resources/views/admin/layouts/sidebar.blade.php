@@ -91,6 +91,14 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.slider.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Slider
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

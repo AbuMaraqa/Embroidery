@@ -52,6 +52,13 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [App\Http\Controllers\admin\ProductController::class, 'edit'])->name('admin.products.edit');
         Route::put('/update', [App\Http\Controllers\admin\ProductController::class, 'update'])->name('admin.products.update');
     });
+    Route::group(['prefix' => 'slider'], function () {
+        Route::get('/index', [App\Http\Controllers\admin\SliderController::class, 'index'])->name('admin.slider.index');
+        Route::get('/add', [App\Http\Controllers\admin\SliderController::class, 'add'])->name('admin.slider.add');
+        Route::post('/create', [App\Http\Controllers\admin\SliderController::class, 'create'])->name('admin.slider.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\admin\SliderController::class, 'edit'])->name('admin.slider.edit');
+        Route::put('/update', [App\Http\Controllers\admin\SliderController::class, 'update'])->name('admin.slider.update');
+    });
 });
 
 
