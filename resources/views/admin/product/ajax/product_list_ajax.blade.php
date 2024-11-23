@@ -15,11 +15,13 @@
         @else
             @foreach ($data as $key)
                 <tr>
-                    <td></td>
+                    <td>
+                        <img style="width: 40px" src="{{asset('storage/product/'.$key->product_image)}}" alt="">
+                    </td>
                     <td>{{ $key->product_name }}</td>
                     <td>{{ $key->product_price }}</td>
                     <td class="text-center">
-                        <a href="{{ route('admin.product.edit',['id'=>$key->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
+                        <a href="{{ route('admin.products.edit',['id'=>$key->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
                     </td>
                 </tr>
             @endforeach

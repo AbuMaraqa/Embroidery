@@ -19,6 +19,17 @@
             font-family: 'Tajawal';
             src: url('{{ asset('assets/admin/fonts/Tajawal/Tajawal-Regular.ttf') }}');
         }
+
+        .carousel .item {
+  height: 100px;
+}
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100px;
+}
     </style>
 </head>
 
@@ -27,5 +38,6 @@
     @include('web.layouts.content')
     @include('web.layouts.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @yield('script')
 </body>
 </html>
