@@ -20,9 +20,9 @@
         <section class="">
           <p class="d-flex justify-content-center align-items-center">
             <span class="me-3">سجل مجانا</span>
-            <button type="button" class="btn btn-outline-light btn-rounded">
+            <a href="{{ route('register')}}" type="button" class="btn btn-outline-light btn-rounded">
               تسجيل الان
-            </button>
+            </a>
           </p>
         </section>
         <!-- Section: CTA -->

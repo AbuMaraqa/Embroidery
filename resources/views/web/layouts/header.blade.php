@@ -14,8 +14,12 @@
                 <li class="nav-item dropdown" style="list-style-type:none;">
                     <span href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="font-size: 20px" class="fa fa-user nav-link"></span>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">الملف الشخصي</a></li>
-                    <li><a class="dropdown-item text-danger" href="{{ route('logout')}}">تسجيل الخروج</a></li>
+                        @if (Auth::check())
+                            <li><a class="dropdown-item" href="#">{{ auth()->user()->name }}</a></li>
+                            <li><a class="dropdown-item text-danger" href="{{ route('logout')}}">تسجيل الخروج</a></li>
+                        @else
+                            <li><a class="dropdown-item" href="{{ route('login')}}">تسجيل الدخول</a></li>
+                        @endif
                     </ul>
                 </li>
             </div>

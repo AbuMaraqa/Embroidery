@@ -22,6 +22,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
+                @if (auth()->user()->user_role == 'admin')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -45,6 +46,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if (auth()->user()->user_role == 'admin')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -68,6 +71,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if (auth()->user()->user_role == 'admin' || auth()->user()->user_role == 'embroider')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -91,6 +96,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if (auth()->user()->user_role == 'admin')
                 <li class="nav-item has-treeview">
                     <a href="{{ route('admin.slider.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-list"></i>
@@ -99,6 +106,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

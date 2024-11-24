@@ -32,6 +32,7 @@ class ProductController extends Controller
         $data->product_name = $request->product_name;
         $data->product_price = $request->product_price;
         $data->category_id = $request->category_id;
+        $data->user_id = auth()->user()->id;
         $data->product_description = $request->product_description;
         if ($request->hasFile('product_image')) {
             $file = $request->file('product_image');

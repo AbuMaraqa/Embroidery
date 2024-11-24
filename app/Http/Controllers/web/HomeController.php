@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = ProductModel::get();
+        $products = ProductModel::with('user')->get();
         $category = CategoryModel::get();
         $slider = SliderModel::get();
         return view('web.home',['products'=>$products , 'category'=>$category , 'slider'=>$slider]);

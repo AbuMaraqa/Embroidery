@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 @section('content')
-<div class="row">
+<div class="row m-5">
     <div class="col-md-12">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -26,14 +26,14 @@
           </div>
     </div>
 </div>
-<div class="row m-3">
+<div class="row mt-5 mb-5">
     @foreach ($products as $key)
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card" style="width: 18rem;">
-            <img src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
+            <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{ $key->product_name}}</h5>
-              <p class="card-text">{{ $key->product_description}}</p>
+              <p class="card-text">{{ $key->user->name}}</p>
               <a href="#" class="btn btn-dark">اضافة للسلة</a>
             </div>
         </div>
