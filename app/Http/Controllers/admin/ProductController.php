@@ -68,4 +68,11 @@ class ProductController extends Controller
             return redirect()->route('admin.products.index')->with(['success'=>'تم انشاء المنتج بنجاح']);
         }
     }
+
+    public function delete($id){
+        $data = ProductModel::where('id',$id)->first();
+        if($data->delete()){
+            return redirect()->route('admin.products.index')->with(['success'=>'تم حذف المنتج بنجاح']);
+        }
+    }
 }

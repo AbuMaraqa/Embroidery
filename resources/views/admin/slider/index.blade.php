@@ -41,9 +41,12 @@
                                         @else
                                         @foreach ($data as $key)
                                         <tr>
-                                            <td>{{ $key->image}}</td>
+                                            <td>
+                                                <img style="width: 40px" src="{{ asset('storage/slider/'.$key->image)}}" alt="">
+                                            </td>
                                             <td>
                                                 <a href="#" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
+                                                <a href="{{ route('admin.slider.delete' , ['id'=>$key->id])}}" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
                                             </td>
                                         </tr>
                                         @endforeach

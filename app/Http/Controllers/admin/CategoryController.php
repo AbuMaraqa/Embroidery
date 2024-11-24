@@ -43,4 +43,11 @@ class CategoryController extends Controller
             return redirect()->route('admin.category.index')->with(['success'=>'تم تعديل القسم بنجاح']);
         }
     }
+
+    public function delete($id){
+        $data = CategoryModel::where('id',$id)->first();
+        if($data->delete()){
+            return redirect()->route('admin.category.index')->with(['success'=>'تم حذف القسم بنجاح']);
+        }
+    }
 }

@@ -40,6 +40,7 @@
                                                 <td>{{ $key->category_name }}</td>
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.category.edit',['id'=>$key->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
+                                                    <a href="{{ route('admin.category.delete',['id'=>$key->id])}}" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
                                                 </td>
                                             </tr>
                                         @endforeach

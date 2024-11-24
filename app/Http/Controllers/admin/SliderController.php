@@ -30,4 +30,11 @@ class SliderController extends Controller
             return redirect()->route('admin.slider.index')->with(['success'=>'تم انشاء الصورة بنجاح']);
         }
     }
+
+    public function delete($id){
+        $data = SliderModel::where('id',$id)->first();
+        if($data->delete()){
+            return redirect()->route('admin.slider.index')->with(['success'=>'تم حذف الصورة بنجاح']);
+        }
+    }
 }

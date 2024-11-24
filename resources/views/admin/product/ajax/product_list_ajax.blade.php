@@ -22,6 +22,7 @@
                     <td>{{ $key->product_price }}</td>
                     <td class="text-center">
                         <a href="{{ route('admin.products.edit',['id'=>$key->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
+                        <a href="{{ route('admin.products.delete',['id'=>$key->id])}}" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
                     </td>
                 </tr>
             @endforeach
