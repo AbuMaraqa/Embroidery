@@ -28,16 +28,18 @@
 </div>
 <div class="row mt-5 mb-5">
     @foreach ($products as $key)
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-            <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ $key->product_name}}</h5>
-              <p class="card-text">{{ $key->user->name}}</p>
-              <a href="#" class="btn btn-dark">اضافة للسلة</a>
+        <form class="col-md-3" action="{{ route('cart.addToCart') }}" method="post">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $key->id}}">
+            <div class="card" style="width: 18rem;">
+                <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{ $key->product_name}}</h5>
+                <p class="card-text">{{ $key->user->name}}</p>
+                <button class="btn btn-dark">اضافة للسلة</button>
+                </div>
             </div>
-        </div>
-    </div>
+        </form>
     @endforeach
 </div>
 @endsection

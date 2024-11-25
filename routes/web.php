@@ -26,6 +26,11 @@ Route::prefix('product')->group(function () {
 Route::prefix('category')->group(function () {
     Route::get('/index/{id}', [App\Http\Controllers\web\CategoryController::class, 'index'])->name('category.index');
 });
+Route::prefix('cart')->group(function () {
+    Route::get('/getCart', [App\Http\Controllers\web\CartController::class, 'getCart'])->name('cart.getCart');
+    Route::post('/addToCart', [App\Http\Controllers\web\CartController::class, 'addToCart'])->name('cart.addToCart');
+    Route::post('/removeFromCart', [App\Http\Controllers\web\CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+});
 
 
 Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
