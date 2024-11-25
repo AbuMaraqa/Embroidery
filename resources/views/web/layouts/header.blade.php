@@ -10,7 +10,7 @@
                 <input type="text" class="form-control" placeholder="بحث">
             </div>
             <div class="col-md-3 text-end d-flex justify-content-end align-items-center">
-                <a href="{{ route('cart.getCart') }}" style="font-size: 20px" class="fa fa-shopping-cart pe-4"></a>
+                <a href="{{ route('cart.getCart') }}" style="font-size: 20px" class="fa fa-shopping-cart text-dark pe-4"></a>
                 <li class="nav-item dropdown" style="list-style-type:none;">
                     <span href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="font-size: 20px" class="fa fa-user nav-link"></span>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

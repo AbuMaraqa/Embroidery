@@ -65,6 +65,16 @@ input {
     outline: none;
 }
 
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+}
+
 input:focus {
     border-color: #430E15;
     box-shadow: 0 0 5px rgba(255, 126, 179, 0.5);
@@ -104,22 +114,40 @@ input:focus {
 <body>
     <div class="signup-container">
         <h1>تسجيل حساب جديد</h1>
-        <form>
+        @if($errors->any())
+    <ul>
+    @foreach($errors->all() as $error)
+        <li class="text-danger">{{ $error }}</li>
+    @endforeach
+    </ul>
+@endif
+        <form action="{{ route('register')}}" method="post">
+            @csrf
             <div class="form-group">
                 <label for="name">الاسم الكامل</label>
-                <input type="text" id="name" placeholder="أدخل اسمك الكامل" required>
+                <input type="text" name="name" id="name" placeholder="أدخل اسمك الكامل" required>
+                @error('name')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="email">البريد الإلكتروني</label>
-                <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                <input type="email" name="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                @error('email')
+                    <p class="text-danger">{{ $email }}</p>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="password">كلمة المرور</label>
-                <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                <input type="password" name="password" id="password" placeholder="أدخل كلمة المرور" required>
             </div>
             <div class="form-group">
-                <label for="confirm-password">تأكيد كلمة المرور</label>
-                <input type="password" id="confirm-password" placeholder="أعد إدخال كلمة المرور" required>
+                <label for="user_role">اختر مستخدم</label>
+                <select name="user_role" type="user_role" required>
+                    <option value="">اختر مستخدم</option>
+                    <option value="embroider">مطرز</option>
+                    <option value="client">عميل</option>
+                </select>
             </div>
             <button type="submit" class="signup-btn">تسجيل</button>
             <p class="login-link">
