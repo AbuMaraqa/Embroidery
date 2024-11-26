@@ -28,7 +28,7 @@
 </div>
 <div class="row mt-5 mb-5">
     @foreach ($products as $key)
-        <form class="col-md-3" action="{{ route('cart.addToCart') }}" method="post">
+        <form class="col-md-3 mb-4" action="{{ route('cart.addToCart') }}" method="post">
             @csrf
             <input type="hidden" name="product_id" value="{{ $key->id}}">
             <div class="card" style="width: 18rem;">
@@ -36,6 +36,7 @@
                 <div class="card-body">
                 <h5 class="card-title">{{ $key->product_name}}</h5>
                 <p class="card-text">{{ $key->user->name ?? ''}}</p>
+                <p class="card-text"><span>₪</span><span>{{ $key->product_price}}</span></p>
                 <button class="btn btn-dark">اضافة للسلة</button>
                 </div>
             </div>

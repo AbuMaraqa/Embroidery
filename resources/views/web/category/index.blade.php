@@ -10,7 +10,7 @@
                 <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{ $key->product_name}}</h5>
-                  <p class="card-text">{{ $key->user->name}}</p>
+                  <p class="card-text">{{ $key->user->name ?? ''}}</p>
                   <button type="submit" class="btn btn-dark">اضافة للسلة</button>
                 </div>
             </div>
