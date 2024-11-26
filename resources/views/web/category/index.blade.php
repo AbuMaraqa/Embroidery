@@ -11,6 +11,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ $key->product_name}}</h5>
                   <p class="card-text">{{ $key->user->name ?? ''}}</p>
+                  <p class="card-text"><span>₪</span><span>{{ $key->product_price}}</span></p>
                   <button type="submit" class="btn btn-dark">اضافة للسلة</button>
                 </div>
             </div>
