@@ -134,7 +134,7 @@ input:focus {
                 <label for="email">البريد الإلكتروني</label>
                 <input type="email" name="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
                 @error('email')
-                    <p class="text-danger">{{ $email }}</p>
+                    <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
