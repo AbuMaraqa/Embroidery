@@ -15,7 +15,7 @@ class ProductController extends Controller
     }
 
     public function list_product_ajax(Request $request){
-        $data = ProductModel::get();
+        $data = ProductModel::where('user_id',auth()->user()->id)->get();
         return response()->json([
             'success'=>true,
             'view'=>view('admin.product.ajax.product_list_ajax',['data'=>$data])->render(),
