@@ -52,6 +52,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
+            'user_role' => 'required|string|in:embroider,client', // تأكد من التحقق من القيمة المحددة
         ]);
     }
 
@@ -67,7 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_role' => $data['user_role'],
+            'user_role' => $data['user_role'], // تأكد من إرسال الحقل بشكل صحيح
         ]);
     }
 }

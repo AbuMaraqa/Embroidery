@@ -142,8 +142,8 @@ input:focus {
                 <input type="password" name="password" id="password" placeholder="أدخل كلمة المرور" required>
             </div>
             <div class="form-group">
-                <label for="user_role">اختر مستخدم</label>
-                <select name="user_role" type="user_role" required>
+                <label>اختر مستخدم</label>
+                <select name="user_role" required>
                     <option value="">اختر مستخدم</option>
                     <option value="embroider">مطرز</option>
                     <option value="client">عميل</option>
