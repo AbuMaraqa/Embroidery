@@ -72,6 +72,25 @@
                     </ul>
                 </li>
                 @endif
+                @if (auth()->user()->user_role == 'embroider')
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-list"></i>
+                        <p>
+                            الطلبيات
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.products.add')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>الطلبيات الواردة</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
                 @if (auth()->user()->user_role == 'admin' || auth()->user()->user_role == 'embroider')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -105,6 +124,31 @@
                             Slider
                         </p>
                     </a>
+                </li>
+                @endif
+                @if (auth()->user()->user_role == 'admin')
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            طرق الشحن
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.shipping_methods.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>قائمة طرق الشحن</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.shipping_methods.add')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>اضافة طريقة شحن</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 @endif
             </ul>

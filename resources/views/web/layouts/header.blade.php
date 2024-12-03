@@ -16,6 +16,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if (Auth::check())
                             <li><a class="dropdown-item" href="#">{{ auth()->user()->name }}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('orders.my_orders')}}">الطلبيات الخاص بي</a></li>
                             <li><a class="dropdown-item text-danger" href="{{ route('logout')}}">تسجيل الخروج</a></li>
                         @else
                             <li><a class="dropdown-item" href="{{ route('login')}}">تسجيل الدخول</a></li>

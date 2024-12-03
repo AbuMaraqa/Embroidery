@@ -32,6 +32,16 @@ Route::prefix('cart')->group(function () {
     Route::post('/removeFromCart', [App\Http\Controllers\web\CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
 });
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/get_orders', [App\Http\Controllers\OrdersController::class, 'get_orders'])->name('orders.get_orders');
+        Route::post('/processPayment', [App\Http\Controllers\OrdersController::class, 'processPayment'])->name('orders.processPayment');
+        Route::post('/cart_order_ajax', [App\Http\Controllers\OrdersController::class, 'cart_order_ajax'])->name('orders.cart_order_ajax');
+        Route::post('/update_qty', [App\Http\Controllers\OrdersController::class, 'update_qty'])->name('orders.update_qty');
+        Route::get('/my_orders', [App\Http\Controllers\OrdersController::class, 'my_orders'])->name('orders.my_orders');
+    });
+});
+
 
 Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
     Route::get('/home', [App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin.home');
@@ -66,6 +76,14 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [App\Http\Controllers\admin\SliderController::class, 'edit'])->name('admin.slider.edit');
         Route::put('/update', [App\Http\Controllers\admin\SliderController::class, 'update'])->name('admin.slider.update');
         Route::get('/delete/{id}', [App\Http\Controllers\admin\SliderController::class, 'delete'])->name('admin.slider.delete');
+    });
+    Route::group(['prefix' => 'shipping_methods'], function () {
+        Route::get('/index', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'index'])->name('admin.shipping_methods.index');
+        Route::get('/add', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'add'])->name('admin.shipping_methods.add');
+        Route::post('/create', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'create'])->name('admin.shipping_methods.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'edit'])->name('admin.shipping_methods.edit');
+        Route::post('/update', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'update'])->name('admin.shipping_methods.update');
+        Route::get('/delete/{id}', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'delete'])->name('admin.shipping_methods.delete');
     });
 });
 

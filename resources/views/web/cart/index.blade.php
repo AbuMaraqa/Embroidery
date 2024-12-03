@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 @section('content')
-<h4 class="text-center mt-3">السلة الخاصة بي</h4>
+<h3 class="text-center mt-3 mb-4">السلة الخاصة بي</h3>
 @if ($cartItems->isEmpty())
                     لا توجد أصناف بالسلة
                 @else
@@ -16,11 +16,28 @@
                                 @if (auth()->check())
                                 <p class="card-text">{{ $key->user->name}}</p>
                                 @endif
+                                <p class="card-text"><span>₪</span><span>{{ $key->product->product_price}}</span></p>
                                 <button type="submit" class="btn btn-danger">ازالة من السلة</button>
                                 </div>
                             </div>
                         </form>
                         @endforeach
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <a href="{{ route('orders.get_orders')}}" class="btn btn-dark">اتمام الطلب</a>
+                                        </div>
+                                        <div class="col-md-9 justify-content-center align-items-center">
+                                            <h3 class="text-end me-5">المجموع الكلي: <span>₪</span><span>{{ $totalPrice}}</span></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 @endif
 @endsection
