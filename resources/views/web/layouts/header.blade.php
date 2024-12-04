@@ -16,7 +16,10 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if (Auth::check())
                             <li><a class="dropdown-item" href="#">{{ auth()->user()->name }}</a></li>
+                            @if (auth()->user()->user_role == 'client' || auth()->user()->user_role == 'embroider')
                             <li><a class="dropdown-item" href="{{ route('orders.my_orders')}}">الطلبيات الخاص بي</a></li>
+                            <li><a class="dropdown-item" href="{{ route('web.embroidery.new_embroidery')}}">طلب تطريز</a></li>
+                            @endif
                             <li><a class="dropdown-item text-danger" href="{{ route('logout')}}">تسجيل الخروج</a></li>
                         @else
                             <li><a class="dropdown-item" href="{{ route('login')}}">تسجيل الدخول</a></li>

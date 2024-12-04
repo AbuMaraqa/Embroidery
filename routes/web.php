@@ -40,6 +40,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/update_qty', [App\Http\Controllers\OrdersController::class, 'update_qty'])->name('orders.update_qty');
         Route::get('/my_orders', [App\Http\Controllers\OrdersController::class, 'my_orders'])->name('orders.my_orders');
     });
+    Route::group(['prefix' => 'embroidery'], function () {
+        Route::get('/new_embroidery', [App\Http\Controllers\web\EmbroideryController::class, 'new_embroidery'])->name('web.embroidery.new_embroidery');
+        Route::post('/create_post', [App\Http\Controllers\web\EmbroideryController::class, 'create_post'])->name('web.embroidery.create_post');
+    });
 });
 
 
