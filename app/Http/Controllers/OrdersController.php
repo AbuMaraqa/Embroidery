@@ -196,4 +196,11 @@ public function my_orders(){
     $category = CategoryModel::get();
     return view('web.orders.my_order',['data'=>$data , 'category'=>$category]);
 }
+
+
+public function order_details($id){
+    $data = OrdersModel::with('order_items')->where('id',$id)->first();
+    $category = CategoryModel::get();
+    return view('web.orders.order_details',['data'=>$data , 'category'=>$category]);
+}
 }

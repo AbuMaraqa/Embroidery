@@ -36,7 +36,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-primary btn-sm">عرض</a>
+                                            <a href="{{ route('orders.order_details',['id'=>$order->id]) }}" class="btn btn-primary btn-sm">عرض</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -83,7 +83,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('admin.products.add')}}" class="nav-link">
+                            <a href="{{ route('admin.orders.list_order')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>الطلبيات الواردة</p>
                             </a>

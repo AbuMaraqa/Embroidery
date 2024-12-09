@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/cart_order_ajax', [App\Http\Controllers\OrdersController::class, 'cart_order_ajax'])->name('orders.cart_order_ajax');
         Route::post('/update_qty', [App\Http\Controllers\OrdersController::class, 'update_qty'])->name('orders.update_qty');
         Route::get('/my_orders', [App\Http\Controllers\OrdersController::class, 'my_orders'])->name('orders.my_orders');
+        Route::get('/order_details/{id}', [App\Http\Controllers\OrdersController::class, 'order_details'])->name('orders.order_details');
     });
     Route::group(['prefix' => 'embroidery'], function () {
         Route::get('/new_embroidery', [App\Http\Controllers\web\EmbroideryController::class, 'new_embroidery'])->name('web.embroidery.new_embroidery');
@@ -88,6 +89,10 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'edit'])->name('admin.shipping_methods.edit');
         Route::post('/update', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'update'])->name('admin.shipping_methods.update');
         Route::get('/delete/{id}', [App\Http\Controllers\admin\ShippingMehtodsController::class, 'delete'])->name('admin.shipping_methods.delete');
+    });
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/list_order', [App\Http\Controllers\admin\OrdersController::class, 'list_order'])->name('admin.orders.list_order');
+        Route::get('/order_details/{id}', [App\Http\Controllers\admin\OrdersController::class, 'order_details'])->name('admin.orders.order_details');
     });
 });
 
