@@ -29,4 +29,12 @@ class OrdersController extends Controller
         })->get();
         return view('admin.orders.order_details',['data'=>$data]);
     }
+
+    public function update_product_status(Request $request){
+        $data = OrderItemsModel::where('id',$request->id)->first();
+        $data->status = $request->status;
+        if($data->save()){
+            return redirect()->back()->with(['success'=>'تم تعديل حالة المنتج بنجاح']);
+        }
+    }
 }

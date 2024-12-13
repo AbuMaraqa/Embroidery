@@ -40,10 +40,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/update_qty', [App\Http\Controllers\OrdersController::class, 'update_qty'])->name('orders.update_qty');
         Route::get('/my_orders', [App\Http\Controllers\OrdersController::class, 'my_orders'])->name('orders.my_orders');
         Route::get('/order_details/{id}', [App\Http\Controllers\OrdersController::class, 'order_details'])->name('orders.order_details');
+        Route::post('/update_status', [App\Http\Controllers\OrdersController::class, 'update_status'])->name('orders.update_status');
     });
     Route::group(['prefix' => 'embroidery'], function () {
         Route::get('/new_embroidery', [App\Http\Controllers\web\EmbroideryController::class, 'new_embroidery'])->name('web.embroidery.new_embroidery');
         Route::post('/create_post', [App\Http\Controllers\web\EmbroideryController::class, 'create_post'])->name('web.embroidery.create_post');
+    });
+    Route::group(['prefix' => 'embroidery_request'], function () {
+        Route::post('/create', [App\Http\Controllers\web\EmbroideryRequestController::class, 'create'])->name('web.embroidery_request.create');
+        Route::get('/embroidery_request_index', [App\Http\Controllers\web\EmbroideryRequestController::class, 'embroidery_request_index'])->name('web.embroidery_request.embroidery_request_index');
+        Route::get('/embroidery_request_details/{id}', [App\Http\Controllers\web\EmbroideryRequestController::class, 'embroidery_request_details'])->name('web.embroidery_request.embroidery_request_details');
+        Route::post('/accept_embroidery', [App\Http\Controllers\web\EmbroideryRequestController::class, 'accept_embroidery'])->name('web.embroidery_request.accept_embroidery');
     });
 });
 
@@ -93,6 +100,7 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/list_order', [App\Http\Controllers\admin\OrdersController::class, 'list_order'])->name('admin.orders.list_order');
         Route::get('/order_details/{id}', [App\Http\Controllers\admin\OrdersController::class, 'order_details'])->name('admin.orders.order_details');
+        Route::post('/update_product_status', [App\Http\Controllers\admin\OrdersController::class, 'update_product_status'])->name('admin.orders.update_product_status');
     });
 });
 

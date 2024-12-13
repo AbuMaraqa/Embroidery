@@ -26,7 +26,42 @@
           </div>
     </div>
 </div>
+@if (auth()->check())
+@if (auth()->user()->user_role == 'embroider')
+@if (!$embroidery_request->isEmpty())
+<div class="row">
+    <div class="col-md-12">
+        <h4>المنشورات الخاصة بالعملاء</h4>
+    </div>
+    @foreach ($embroidery_request as $key)
+        <form class="col-md-3" action="{{ route('web.embroidery_request.create') }}" method="post">
+            @csrf
+            <input type="hidden" name="id" value="{{ $key->id}}">
+            <div class="card" style="width: 18rem;">
+                <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/embroidery_request/'.$key->image)}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $key->subject}}</h5>
+                  <p class="card-text">{{ $key->notes }}</p>
+                  <p class="card-text">{{ $key->user->name ?? ''}}</p>
+                  @if (!App\Models\EmbroideryRequestSubmitModel::where('user_id',auth()->user()->id)->where('embroidery_request_id',$key->id)->first())
+                    <textarea name="notes" id="" cols="30" rows="2" class="form-control mb-2" placeholder="كتابة وصف"></textarea>
+                    <input required type="number" name="price" class="form-control" placeholder="ضع عرض السعر">
+                    <button type="submit" class="btn btn-primary mt-2">ارسال</button>
+                  @endif
+                  {{-- <a href="{{ route('embroider.order_details', $key->id) }}" class="btn btn-dark">تفاصيل الطلبية</a> --}}
+                </div>
+            </div>
+        </form>
+    @endforeach
+</div>
+
+@endif
+@endif
+@endif
 <div class="row mt-5 mb-5">
+    <div class="col-md-12">
+        <h4>المنتجات</h4>
+    </div>
     @foreach ($products as $key)
         <form class="col-md-3 mb-4" action="{{ route('cart.addToCart') }}" method="post">
             @csrf

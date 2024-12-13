@@ -32,7 +32,21 @@
                                         @foreach ($data as $key)
                                             <tr>
                                                 <td>{{ $key->product->product_name }}</td>
-                                                <td>{{ $key->status }}</td>
+                                                <td>
+                                                    <form action="{{ route('admin.orders.update_product_status') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $key->id }}">
+                                                            <select name="status" id="">
+                                                                <option @if ($key->status == 'pending')
+                                                                    selected
+                                                                @endif value="pending">قيد التحضير</option>
+                                                                <option @if ($key->status == 'processing')
+                                                                    selected
+                                                                @endif value="processing">تم تجهيز المنتج</option>
+                                                            </select>
+                                                        <button class="btn btn-primary btn-sm" type="submit">تعديل</button>
+                                                    </form>
+                                                </td>
                                                 <td>{{ $key->price }} <span>₪</span></td>
                                                 <td>{{ $key->qty }}</td>
                                                 <td>{{ $key->price * $key->qty }} <span>₪</span></td>

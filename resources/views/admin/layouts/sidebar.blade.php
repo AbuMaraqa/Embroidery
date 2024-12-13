@@ -72,7 +72,7 @@
                     </ul>
                 </li>
                 @endif
-                @if (auth()->user()->user_role == 'embroider')
+                @if (auth()->user()->user_role == 'embroider' || auth()->user()->user_role == 'admin')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-list"></i>

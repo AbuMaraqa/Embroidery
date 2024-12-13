@@ -19,6 +19,7 @@
                             @if (auth()->user()->user_role == 'client' || auth()->user()->user_role == 'embroider')
                             <li><a class="dropdown-item" href="{{ route('orders.my_orders')}}">الطلبيات الخاص بي</a></li>
                             <li><a class="dropdown-item" href="{{ route('web.embroidery.new_embroidery')}}">طلب تطريز</a></li>
+                            <li><a class="dropdown-item" href="{{ route('web.embroidery_request.embroidery_request_index')}}">الطلبات الخاصة بالمنشورات</a></li>
                             @endif
                             <li><a class="dropdown-item text-danger" href="{{ route('logout')}}">تسجيل الخروج</a></li>
                         @else

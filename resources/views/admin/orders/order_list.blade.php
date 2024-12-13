@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 table-responsive">
-                            <table class="table table-sm table-hover">
+                            <table class="table table-sm table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>رقم الطلب</th>
@@ -31,11 +31,19 @@
                                             <tr>
                                                 <td>{{ $key->id }}</td>
                                                 <td>
-                                                    @if ($key->status == 'pending')
-                                                        قيد التحضير
-                                                    @else
-                                                        مكتمل
-                                                    @endif
+                                                    <form action="{{ route('orders.update_status') }}" class="d-felx" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $key->id }}">
+                                                        <select name="order_status" id="">
+                                                            <option @if ($key->order_status == 1)
+                                                                selected
+                                                            @endif value="1">قيد التحضير</option>
+                                                            <option @if ($key->order_status == 2)
+                                                                selected
+                                                            @endif value="2">مكتمل</option>
+                                                        </select>
+                                                        <button class="btn btn-primary btn-sm">تعديل الحالة</button>
+                                                    </form>
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.orders.order_details',['id'=>$key->id]) }}" class="btn btn-primary btn-sm">عرض</a>
