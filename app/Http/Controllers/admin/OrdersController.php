@@ -15,12 +15,18 @@ class OrdersController extends Controller
     }
 
     public function list_order(){
-        $data = OrdersModel::whereIn('id',function($query){
-            $query->select('order_id')->from('order_items')->whereIn('product_id',function($query){
-                $query->select('id')->from('products')->where('user_id',3);
-            });
-        })->get();
-        return view('admin.orders.order_list',['data'=>$data]);
+        if(auth()->user()->user_role == 'admin'){
+            $data = OrdersModel::get();
+            return view('admin.orders.order_list',['data'=>$data]);
+        }
+        else{
+            $data = OrdersModel::whereIn('id',function($query){
+                $query->select('order_id')->from('order_items')->whereIn('product_id',function($query){
+                    $query->select('id')->from('products')->where('user_id',3);
+                });
+            })->get();
+            return view('admin.orders.order_list',['data'=>$data]);
+        }
     }
 
     public function order_details($id){
