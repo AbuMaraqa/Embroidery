@@ -32,7 +32,7 @@ Route::prefix('cart')->group(function () {
     Route::post('/removeFromCart', [App\Http\Controllers\web\CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth' , 'checkuserstatus']], function () {
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/get_orders', [App\Http\Controllers\OrdersController::class, 'get_orders'])->name('orders.get_orders');
         Route::post('/processPayment', [App\Http\Controllers\OrdersController::class, 'processPayment'])->name('orders.processPayment');
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth' , 'checkuserstatus'] , 'prefix' => 'admin'], function () {
     Route::get('/home', [App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin.home');
     Route::group(['prefix' => 'users'], function () {
         Route::get('/index', [App\Http\Controllers\admin\UserController::class, 'index'])->name('admin.users.index');
@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth'] , 'prefix' => 'admin'], function () {
         Route::post('create', [App\Http\Controllers\admin\UserController::class, 'create'])->name('admin.users.create');
         Route::get('edit/{id}', [App\Http\Controllers\admin\UserController::class, 'edit'])->name('admin.users.edit');
         Route::put('update', [App\Http\Controllers\admin\UserController::class, 'update'])->name('admin.users.update');
+        Route::get('active_user_stauts/{id}', [App\Http\Controllers\admin\UserController::class, 'active_user_stauts'])->name('admin.users.active_user_stauts');
     });
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [App\Http\Controllers\admin\CategoryController::class, 'index'])->name('admin.category.index');

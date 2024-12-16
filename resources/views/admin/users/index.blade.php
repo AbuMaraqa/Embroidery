@@ -33,7 +33,7 @@
                                             <th>الاسم</th>
                                             <th>البريد الالكتروني</th>
                                             <th>نوع المستخدم</th>
-                                            <th style="width: 100px" class="text-center">العمليات</th>
+                                            <th style="width: 200px" class="text-center">العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,7 +51,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.users.edit',['id'=>$user->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
+                                                    @if (($user->user_role === 'embroider') && ($user->user_status === 'inactive'))
+                                                        <a href="{{ route('admin.users.active_user_stauts',['id'=>$user->id]) }}" class="btn btn-warning btn-sm">تفعيل</a>
+                                                    @endif
+                                                        <a href="{{ route('admin.users.edit',['id'=>$user->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
                                                 </td>
                                             </tr>
                                         @endforeach

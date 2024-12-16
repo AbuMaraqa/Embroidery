@@ -55,4 +55,11 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->with(['success'=>'تم تعديل بيانات المستخدم بنجاح']);
         }
     }
+
+    public function active_user_stauts($id){
+        $data = User::where('id',$id)->first();
+        $data->user_status = 'active';
+        $data->save();
+        return redirect()->route('admin.users.index')->with(['success'=>'تم تفعيل المستخدم بنجاح']);
+    }
 }
