@@ -52,6 +52,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/embroidery_request_details/{id}', [App\Http\Controllers\web\EmbroideryRequestController::class, 'embroidery_request_details'])->name('web.embroidery_request.embroidery_request_details');
         Route::post('/accept_embroidery', [App\Http\Controllers\web\EmbroideryRequestController::class, 'accept_embroidery'])->name('web.embroidery_request.accept_embroidery');
     });
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/profile/{id}', [App\Http\Controllers\web\ProfileController::class, 'profile'])->name('web.profile.profile');
+        Route::post('/update', [App\Http\Controllers\web\ProfileController::class, 'update'])->name('web.profile.update');
+    });
 });
 
 

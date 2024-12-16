@@ -33,7 +33,7 @@ class CartController extends Controller
             ]
         );
 
-        return response()->json(['message' => 'Product added to cart']);
+        return redirect()->back()->with(['success' => 'تمت الاضافة بنجاح']);
     }
 
     public function getCart()
