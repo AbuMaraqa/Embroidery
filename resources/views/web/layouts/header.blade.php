@@ -16,6 +16,9 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if (Auth::check())
                             <li><a class="dropdown-item" href="#">{{ auth()->user()->name }}</a></li>
+                            @if (auth()->user()->user_role == 'embroider')
+                                <p class="text-center alert alert-success">الرصيد الخاص بي : <span>{{ auth()->user()->amount }}</span> شيكل</p>
+                            @endif
                             @if (auth()->user()->user_role == 'client' || auth()->user()->user_role == 'embroider')
                             <li><a class="dropdown-item" href="{{ route('web.profile.profile',['id'=>auth()->user()->id])}}">المعلومات الشخصية</a></li>
                             <li><a class="dropdown-item" href="{{ route('orders.my_orders')}}">الطلبيات الخاص بي</a></li>

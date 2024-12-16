@@ -6,7 +6,9 @@ use App\Models\CartModel;
 use App\Models\CategoryModel;
 use App\Models\OrderItemsModel;
 use App\Models\OrdersModel;
+use App\Models\ProductModel;
 use App\Models\ShippingAreasModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
@@ -47,11 +49,12 @@ class OrdersController extends Controller
                             'product_data' => [
                                 'name' => 'Products',
                             ],
-                            'unit_amount' => CartModel::where('user_id', auth()->user()->id)->orWhere('session_id', $sessionId)
-                                ->get()
-                                ->sum(function ($cartItem) {
-                                    return $cartItem->product->product_price * $cartItem->qty;
-                                }),
+                            'unit_amount' => CartModel::where('user_id', auth()->user()->id)
+    ->orWhere('session_id', $sessionId)
+    ->get()
+    ->sum(function ($cartItem) {
+        return $cartItem->product->product_price * $cartItem->qty * 100; // ضرب المبلغ في 100
+    }),
                         ],
                         'quantity' => 1,
                     ],
@@ -60,83 +63,67 @@ class OrdersController extends Controller
                 'success_url' => route('home'),
                 'cancel_url' => route('home'),
             ]);
-
-            $category = CategoryModel::get();
-            $sessionId = session()->getId();
-            $shipping_methods = ShippingAreasModel::get();
-            $cartItems = CartModel::with('product')
-                ->where(function ($query) use ($sessionId) {
-                    $query->where('session_id', $sessionId);
-                    if (auth()->check()) {
-                        $query->orWhere('user_id', auth()->id());
-                    }
-                })
-                ->get();
-            $totalPrice = $cartItems->sum(function ($cartItem) {
-                return $cartItem->product->product_price * $cartItem->qty;
-            });
-
-            $order = new OrdersModel();
-            $order->user_id = auth()->user()->id;
-            $order->order_status = 1;
-            $order->payment_status = 1;
-            $order->total_price =  $totalPrice;
-            $order->address =  $request->address;
-            $order->shipping_method =  $request->shipping_method;
-            $order->total_price =  $totalPrice;
-            if ($order->save()) {
-                foreach ($cartItems as $cartItem) {
-                    $orderItem = new OrderItemsModel();
-                    $orderItem->order_id = $order->id;
-                    $orderItem->product_id = $cartItem->product_id;
-                    $orderItem->qty = $cartItem->qty;
-                    $orderItem->price = $cartItem->product->product_price * $cartItem->qty;
-                    $orderItem->save();
-                }
-
-                CartModel::where('user_id', auth()->user()->id)->orWhere('session_id', $sessionId)->delete();
-            }
-            return redirect()->away($session->url);
-        } else {
-            $category = CategoryModel::get();
-            $sessionId = session()->getId();
-            $shipping_methods = ShippingAreasModel::get();
-            $cartItems = CartModel::with('product')
-                ->where(function ($query) use ($sessionId) {
-                    $query->where('session_id', $sessionId);
-                    if (auth()->check()) {
-                        $query->orWhere('user_id', auth()->id());
-                    }
-                })
-                ->get();
-            $totalPrice = $cartItems->sum(function ($cartItem) {
-                return $cartItem->product->product_price * $cartItem->qty;
-            });
-
-            $order = new OrdersModel();
-            $order->user_id = auth()->user()->id;
-            $order->order_status = 1;
-            $order->payment_status = 1;
-            $order->total_price =  $totalPrice;
-            $order->address =  $request->address;
-            $order->shipping_method =  $request->shipping_method;
-            $order->total_price =  $totalPrice;
-            if ($order->save()) {
-                foreach ($cartItems as $cartItem) {
-                    $orderItem = new OrderItemsModel();
-                    $orderItem->order_id = $order->id;
-                    $orderItem->product_id = $cartItem->product_id;
-                    $orderItem->qty = $cartItem->qty;
-                    $orderItem->price = $cartItem->product->product_price * $cartItem->qty;
-                    $orderItem->save();
-                }
-
-                CartModel::where('user_id', auth()->user()->id)->orWhere('session_id', $sessionId)->delete();
-            }
-            return redirect()->route('home');
         }
-    }
 
+        $cartItems = CartModel::with('product')
+            ->where(function ($query) use ($sessionId) {
+                $query->where('session_id', $sessionId);
+                if (auth()->check()) {
+                    $query->orWhere('user_id', auth()->id());
+                }
+            })
+            ->get();
+
+        $totalPrice = $cartItems->sum(function ($cartItem) {
+            return $cartItem->product->product_price * $cartItem->qty;
+        });
+
+        // حساب حصة الأدمن (20%)
+        $adminShare = $totalPrice * 0.2;
+
+        // إنشاء الطلب
+        $order = new OrdersModel();
+        $order->user_id = auth()->user()->id;
+        $order->order_status = 1;
+        $order->payment_status = 1;
+        $order->total_price = $totalPrice;
+        $order->address = $request->address;
+        $order->shipping_method = $request->shipping_method;
+        $order->save();
+
+        // توزيع المبالغ
+        foreach ($cartItems as $cartItem) {
+            $orderItem = new OrderItemsModel();
+            $orderItem->order_id = $order->id;
+            $orderItem->product_id = $cartItem->product_id;
+            $orderItem->qty = $cartItem->qty;
+            $orderItem->price = $cartItem->product->product_price * $cartItem->qty;
+            $orderItem->save();
+
+            $find_user = ProductModel::where('id', $cartItem->product_id)->first();
+            $embroider = User::where('id', $find_user->user_id)->first();
+
+            // حصة المنتج بعد خصم نسبة الأدمن
+            $productShare = ($cartItem->product->product_price * $cartItem->qty) * 0.8;
+
+            // تحديث مبلغ المتطريز
+            $embroider->amount = $embroider->amount + $productShare;
+            $embroider->save();
+        }
+
+        // حفظ حصة الأدمن (يمكن تخصيص جدول أو مستخدم معين للأدمن)
+        $admin = User::where('user_role', 'admin')->first();
+        if ($admin) {
+            $admin->amount = $admin->amount + $adminShare;
+            $admin->save();
+        }
+
+        CartModel::where('user_id', auth()->user()->id)->orWhere('session_id', $sessionId)->delete();
+
+        return $request->payment_method == 'visa'
+            ? redirect()->away($session->url)
+            : redirect()->route('home');
+    }
     public function cart_order_ajax(Request $request)
     {
         $category = CategoryModel::get();
