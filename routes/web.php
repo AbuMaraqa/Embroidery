@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth' , 'checkuserstatus'] , 'prefix' => 'admin'
         Route::get('edit/{id}', [App\Http\Controllers\admin\UserController::class, 'edit'])->name('admin.users.edit');
         Route::put('update', [App\Http\Controllers\admin\UserController::class, 'update'])->name('admin.users.update');
         Route::get('active_user_stauts/{id}', [App\Http\Controllers\admin\UserController::class, 'active_user_stauts'])->name('admin.users.active_user_stauts');
+        Route::get('deactive_user_stauts/{id}', [App\Http\Controllers\admin\UserController::class, 'deactive_user_stauts'])->name('admin.users.deactive_user_stauts');
     });
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [App\Http\Controllers\admin\CategoryController::class, 'index'])->name('admin.category.index');

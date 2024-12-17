@@ -62,4 +62,11 @@ class UserController extends Controller
         $data->save();
         return redirect()->route('admin.users.index')->with(['success'=>'تم تفعيل المستخدم بنجاح']);
     }
+
+    public function deactive_user_stauts($id){
+        $data = User::where('id',$id)->first();
+        $data->user_status = 'inactive';
+        $data->save();
+        return redirect()->route('admin.users.index')->with(['success'=>'تم تعطيل المستخدم بنجاح']);
+    }
 }
