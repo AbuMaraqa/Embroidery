@@ -19,4 +19,13 @@ class HomeController extends Controller
         $embroidery_request = EmbroideryRequestModel::with('user')->get();
         return view('web.home',['products'=>$products , 'category'=>$category , 'slider'=>$slider , 'embroidery_request'=>$embroidery_request]);
     }
+
+    public function search(Request $request)
+    {
+        $products = ProductModel::with('user')->where('product_name','like','%'.$request->search.'%')->get();
+        $category = CategoryModel::get();
+        $slider = SliderModel::get();
+        $embroidery_request = EmbroideryRequestModel::with('user')->get();
+        return view('web.home',['products'=>$products , 'category'=>$category , 'slider'=>$slider , 'embroidery_request'=>$embroidery_request]);
+    }
 }

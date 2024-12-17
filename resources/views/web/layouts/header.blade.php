@@ -6,9 +6,11 @@
                     <img style="width: 100px" src="{{ asset('img/logo.png')}}" alt="">
                 </a>
             </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="بحث">
-            </div>
+            <form class="col-md-6 d-flex" method="post" action="{{ route('home.search') }}">
+                @csrf
+                <input type="text" name="search" class="form-control" placeholder="بحث">
+                <button type="submit" class="btn btn-primary">بحث</button>
+            </form>
             <div class="col-md-3 text-end d-flex justify-content-end align-items-center">
                 <a href="{{ route('cart.getCart') }}" style="font-size: 20px" class="fa fa-shopping-cart text-dark pe-4"></a>
                 <li class="nav-item dropdown" style="list-style-type:none;">

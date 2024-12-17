@@ -11,7 +11,7 @@
             <div class="carousel-inner">
                 @foreach ($slider as $key)
                 <div class="carousel-item active">
-                    <img style="height: 700px" src="{{ asset('storage/slider/'.$key->image)}}" class="d-block w-100" alt="...">
+                    <img style="height: 400px" src="{{ asset('storage/slider/'.$key->image)}}" class="d-block w-100" alt="...">
                   </div>
                 @endforeach
             </div>
@@ -34,6 +34,8 @@
         <h4>المنشورات الخاصة بالعملاء</h4>
     </div>
     @foreach ($embroidery_request as $key)
+        @if (!App\Models\EmbroideryRequestSubmitModel::where('user_id',auth()->user()->id)->where('embroidery_request_id',$key->id)->first())
+
         <form class="col-md-3" action="{{ route('web.embroidery_request.create') }}" method="post">
             @csrf
             <input type="hidden" name="id" value="{{ $key->id}}">
@@ -43,15 +45,15 @@
                   <h5 class="card-title">{{ $key->subject}}</h5>
                   <p class="card-text">{{ $key->notes }}</p>
                   <p class="card-text">{{ $key->user->name ?? ''}}</p>
-                  @if (!App\Models\EmbroideryRequestSubmitModel::where('user_id',auth()->user()->id)->where('embroidery_request_id',$key->id)->first())
                     <textarea name="notes" id="" cols="30" rows="2" class="form-control mb-2" placeholder="كتابة وصف"></textarea>
                     <input required type="number" name="price" class="form-control" placeholder="ضع عرض السعر">
                     <button type="submit" class="btn btn-primary mt-2">ارسال</button>
-                  @endif
                   {{-- <a href="{{ route('embroider.order_details', $key->id) }}" class="btn btn-dark">تفاصيل الطلبية</a> --}}
                 </div>
             </div>
         </form>
+        @endif
+
     @endforeach
 </div>
 
@@ -67,7 +69,9 @@
             @csrf
             <input type="hidden" name="product_id" value="{{ $key->id}}">
             <div class="card" style="width: 18rem;">
-                <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
+                <a href="{{ route('product.index',['id'=>$key->id]) }}">
+                    <img style="max-height: 300px;min-height: 300px" src="{{ asset('storage/product/'.$key->product_image)}}" class="card-img-top" alt="...">
+                </a>
                 <div class="card-body">
                 <h5 class="card-title">{{ $key->product_name}}</h5>
                 <p class="card-text">{{ $key->user->name ?? ''}}</p>

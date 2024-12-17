@@ -20,8 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\web\HomeController::class, 'index'])->name('home');
+Route::post('search', [App\Http\Controllers\web\HomeController::class, 'search'])->name('home.search');
 Route::prefix('product')->group(function () {
-    Route::get('/index', [App\Http\Controllers\web\ProductController::class, 'index'])->name('product.index');
+    Route::get('/index/{id}', [App\Http\Controllers\web\ProductController::class, 'index'])->name('product.index');
 });
 Route::prefix('category')->group(function () {
     Route::get('/index/{id}', [App\Http\Controllers\web\CategoryController::class, 'index'])->name('category.index');
