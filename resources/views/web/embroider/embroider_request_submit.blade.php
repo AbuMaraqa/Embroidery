@@ -14,6 +14,7 @@
                     <table class="table table-sm table-hover text-center">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th style="width: 10%">رقم المنشور</th>
                                 <th>عنوان المنشور</th>
                                 <th>المطرز التي تمت الترسية عليه</th>
@@ -28,12 +29,15 @@
                             @else
                                 @foreach ($data as $key)
                                     <tr>
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="{{ route('web.message.index',['id'=>$key->id]) }}"><span class="fa fa-message"></span></a>
+                                        </td>
                                         <td>{{ $key->id }}</td>
                                         <td>{{ $key->subject }}</td>
                                         <td>{{ $key->embroider->name ?? '' }}</td>
                                         <td>
                                             @if (empty($key->accept_embroider))
-                                                <a class="btn btn-sm btn-primary" href="{{ route('web.embroidery_request.embroidery_request_details',['id'=>$key->id]) }}"><span class="fa fa-search"></span></a>
+                                                <a class="btn btn-sm btn-dark" href="{{ route('web.embroidery_request.embroidery_request_details',['id'=>$key->id]) }}"><span class="fa fa-search"></span></a>
                                             @else
                                                 تم ترسية مطرز
                                             @endif

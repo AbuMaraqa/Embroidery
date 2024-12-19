@@ -57,6 +57,10 @@ Route::group(['middleware' => ['auth' , 'checkuserstatus']], function () {
         Route::get('/profile/{id}', [App\Http\Controllers\web\ProfileController::class, 'profile'])->name('web.profile.profile');
         Route::post('/update', [App\Http\Controllers\web\ProfileController::class, 'update'])->name('web.profile.update');
     });
+    Route::group(['prefix' => 'message'], function () {
+        Route::get('/index/{id}', [App\Http\Controllers\MessageController::class, 'index'])->name('web.message.index');
+        Route::post('/create', [App\Http\Controllers\MessageController::class, 'create'])->name('web.message.create');
+    });
 });
 
 
