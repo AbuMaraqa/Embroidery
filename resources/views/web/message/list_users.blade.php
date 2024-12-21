@@ -26,7 +26,7 @@
                                         <tr>
                                             <td>{{ $key->sender_name->name }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-primary" href="{{ route('web.message.index',['id'=>$key->id]) }}">asd</a>
+                                                <a class="btn btn-sm btn-primary" href="{{ route('web.message.index',['id'=>\app\Models\User::find($key->sender)->id]) }}"><span class="fa fa-message"></span></a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -6,6 +6,7 @@ use App\Models\CategoryModel;
 use App\Models\MessageModel;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -43,8 +44,13 @@ class MessageController extends Controller
 
     public function list_message()
     {
-        $data = MessageModel::with('sender_name')->where('receive', auth()->user()->id)->get();
-        $category = CategoryModel::get();
-        return view('web.message.list_users', ['data' => $data, 'category' => $category]);
+        $data = MessageModel::with('sender_name')
+        ->where('receive', auth()->user()->id)
+        ->select('sender', 'receive', DB::raw('MAX(message) as message'), DB::raw('MAX(created_at) as created_at'))
+        ->groupBy('sender', 'receive') // Group by sender and receive
+        ->orderBy('created_at', 'desc')
+        ->get();
+    $category = CategoryModel::get();
+    return view('web.message.list_users', ['data' => $data, 'category' => $category]);
     }
 }
