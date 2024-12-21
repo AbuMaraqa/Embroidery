@@ -70,7 +70,12 @@
         <div class="col-md-12">
             <h4>المنتجات</h4>
         </div>
-        @foreach ($products as $key)
+        @if ($products->isEmpty())
+            <div class="col-md-12">
+                <h4>لا يوجد منتجات</h4>
+            </div>
+            @else
+            @foreach ($products as $key)
             <form class="col-md-3 mb-4" action="{{ route('cart.addToCart') }}" method="post">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $key->id }}">
@@ -87,8 +92,9 @@
                     </div>
                 </div>
             </form>
-
         @endforeach
+
+        @endif
     </div>
 
     <!-- Modal -->
@@ -101,7 +107,11 @@
                         <img style="width: 130px" class="mt-2" src="{{ asset('img/logo.png')}}" alt="">
                         <div>
                             <p style="color: #4D0800;font-size: 25px" class="mt-3">
-                                في قلب التراث الفلسطيني ، ينبض التطريز كحكاية تسرد بالخيوط والألوان ، حكاية تجمع بين الأصالة والهوية .                                 موقعنا يهدف إلى إحياء هذا الفن العريق , ليكون بوابتك إلى عالم التطريز الفلسطيني بكل ما بحمله من تفاصيل أصيلة وجمال فريد
+                                في قلب التراث الفلسطيني، ينبض التطريز كحكاية
+ تُسرد بالخيوط والألوان، حكاية تجمع بين الأصالة والهوية.
+ موقعنا يهدف إلى إحياء هذا الفن العريق، ليكون بوابتك
+ إلى عالم التطريزالفلسطيني بكل ما يحمله من تفاصيل
+ أصيلة وجمال فريد.
                             </p>
                         </div>
                     </div>
