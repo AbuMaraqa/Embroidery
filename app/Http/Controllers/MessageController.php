@@ -14,10 +14,10 @@ class MessageController extends Controller
         // Fetch messages where the authenticated user is either the sender or receiver
         $data = MessageModel::where(function ($query) use ($id) {
             $query->where('sender', auth()->user()->id)
-                ->where('receive', $id);
+                ->orWhere('receive', $id);
         })->orWhere(function ($query) use ($id) {
             $query->where('sender', $id)
-                ->where('receive', auth()->user()->id);
+                ->orWhere('receive', auth()->user()->id);
         })->orderBy('created_at', 'asc') // Order by message time
             ->get();
 
