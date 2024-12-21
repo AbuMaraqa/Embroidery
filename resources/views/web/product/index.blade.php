@@ -1,6 +1,5 @@
 @extends('web.layouts.app')
 @section('content')
-@if ($data->status == 1)
 <form class="row" method="post" action="{{ route('cart.addToCart') }}">
     @csrf
     <input type="hidden" name="product_id" value="{{ $data->id }}">
@@ -21,5 +20,4 @@
     </div>
 </form>
 
-@endif
 @endsection
