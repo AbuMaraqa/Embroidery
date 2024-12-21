@@ -22,7 +22,7 @@ class OrdersController extends Controller
         else{
             $data = OrdersModel::whereIn('id',function($query){
                 $query->select('order_id')->from('order_items')->whereIn('product_id',function($query){
-                    $query->select('id')->from('products')->where('user_id',3);
+                    $query->select('id')->from('products')->where('user_id',auth()->user()->id);
                 });
             })->get();
             return view('admin.orders.order_list',['data'=>$data]);
