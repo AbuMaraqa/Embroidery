@@ -30,7 +30,9 @@
                                 @foreach ($data as $key)
                                     <tr>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" href="{{ route('web.message.index',['id'=>$key->id]) }}"><span class="fa fa-message"></span></a>
+                                            @if (!empty($key->accept_embroider))
+                                            <a class="btn btn-sm btn-primary" href="{{ route('web.message.index',['id'=>$key->accept_embroider]) }}"><span class="fa fa-message"></span></a>
+                                            @endif
                                         </td>
                                         <td>{{ $key->id }}</td>
                                         <td>{{ $key->subject }}</td>

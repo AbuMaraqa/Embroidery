@@ -34,6 +34,12 @@ class ProductController extends Controller
         $data->category_id = $request->category_id;
         $data->user_id = auth()->user()->id;
         $data->product_description = $request->product_description;
+        if(auth()->user()->user_role == 'admin'){
+            $data->status = 1;
+        }
+        else{
+            $data->status = 0;
+        }
         if ($request->hasFile('product_image')) {
             $file = $request->file('product_image');
             $extension = $file->getClientOriginalExtension();
@@ -75,5 +81,19 @@ class ProductController extends Controller
         if($data->delete()){
             return redirect()->route('admin.products.index')->with(['success'=>'تم حذف المنتج بنجاح']);
         }
+    }
+
+    public function activeProduct($id){
+        $data = ProductModel::where('id',$id)->first();
+        $data->status = 1;
+        $data->save();
+        return redirect()->route('admin.products.index')->with(['success'=>'تم تفعيل المنتج بنجاح']);
+    }
+
+    public function deactiveProduct($id){
+        $data = ProductModel::where('id',$id)->first();
+        $data->status = 0;
+        $data->save();
+        return redirect()->route('admin.products.index')->with(['success'=>'تم تعطيل المنتج بنجاح']);
     }
 }

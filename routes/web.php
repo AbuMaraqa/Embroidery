@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth' , 'checkuserstatus']], function () {
     Route::group(['prefix' => 'message'], function () {
         Route::get('/index/{id}', [App\Http\Controllers\MessageController::class, 'index'])->name('web.message.index');
         Route::post('/create', [App\Http\Controllers\MessageController::class, 'create'])->name('web.message.create');
+        Route::get('/list_message', [App\Http\Controllers\MessageController::class, 'list_message'])->name('web.message.list_message');
     });
 });
 
@@ -91,6 +92,8 @@ Route::group(['middleware' => ['auth' , 'checkuserstatus'] , 'prefix' => 'admin'
         Route::get('/edit/{id}', [App\Http\Controllers\admin\ProductController::class, 'edit'])->name('admin.products.edit');
         Route::put('/update', [App\Http\Controllers\admin\ProductController::class, 'update'])->name('admin.products.update');
         Route::get('/delete/{id}', [App\Http\Controllers\admin\ProductController::class, 'delete'])->name('admin.products.delete');
+        Route::get('/activeProduct/{id}', [App\Http\Controllers\admin\ProductController::class, 'activeProduct'])->name('admin.products.activeProduct');
+        Route::get('/deactiveProduct/{id}', [App\Http\Controllers\admin\ProductController::class, 'deactiveProduct'])->name('admin.products.deactiveProduct');
     });
     Route::group(['prefix' => 'slider'], function () {
         Route::get('/index', [App\Http\Controllers\admin\SliderController::class, 'index'])->name('admin.slider.index');

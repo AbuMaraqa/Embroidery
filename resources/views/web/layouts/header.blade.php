@@ -19,8 +19,9 @@
                         @if (Auth::check())
                             <li><a class="dropdown-item" href="#">{{ auth()->user()->name }}</a></li>
                             @if (auth()->user()->user_role == 'embroider')
-                                <p class="text-center alert alert-success">الرصيد الخاص بي : <span>{{ auth()->user()->amount }}</span> شيكل</p>
+                                <p class="text-center alert alert-success " style="font-size: 10px">الرصيد الخاص بي : <span>{{ auth()->user()->amount }}</span> شيكل</p>
                                 <li><a class="dropdown-item" href="{{ route('web.profile.profile',['id'=>auth()->user()->id])}}">المعلومات الشخصية</a></li>
+                                <li><a class="dropdown-item" href="{{ route('web.message.list_message',['id'=>auth()->user()->id])}}">الرسائل الواردة</a></li>
                             @endif
                             @if (auth()->user()->user_role == 'client')
                             <li><a class="dropdown-item" href="{{ route('orders.my_orders')}}">الطلبيات الخاص بي</a></li>

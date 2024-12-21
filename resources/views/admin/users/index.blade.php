@@ -56,7 +56,7 @@
                                                         @elseif (($user->user_role === 'embroider') && ($user->user_status === 'active'))
                                                         <a href="{{ route('admin.users.deactive_user_stauts',['id'=>$user->id]) }}" class="btn btn-danger btn-sm">تعطيل</a>
                                                     @endif
-                                                        <a href="{{ route('admin.users.edit',['id'=>$user->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>
+                                                        {{-- <a href="{{ route('admin.users.edit',['id'=>$user->id])}}" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a> --}}
                                                 </td>
                                             </tr>
                                         @endforeach
