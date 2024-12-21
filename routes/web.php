@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth' , 'checkuserstatus']], function () {
         Route::post('/processPayment', [App\Http\Controllers\OrdersController::class, 'processPayment'])->name('orders.processPayment');
         Route::post('/cart_order_ajax', [App\Http\Controllers\OrdersController::class, 'cart_order_ajax'])->name('orders.cart_order_ajax');
         Route::post('/update_qty', [App\Http\Controllers\OrdersController::class, 'update_qty'])->name('orders.update_qty');
+        Route::post('/update_name', [App\Http\Controllers\OrdersController::class, 'update_name'])->name('orders.update_name');
         Route::get('/my_orders', [App\Http\Controllers\OrdersController::class, 'my_orders'])->name('orders.my_orders');
         Route::get('/order_details/{id}', [App\Http\Controllers\OrdersController::class, 'order_details'])->name('orders.order_details');
         Route::post('/update_status', [App\Http\Controllers\OrdersController::class, 'update_status'])->name('orders.update_status');

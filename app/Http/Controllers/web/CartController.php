@@ -26,10 +26,12 @@ class CartController extends Controller
             [
                 'session_id' => $sessionId,
                 'product_id' => $productId,
-                'user_id' => $userId
+                'user_id' => $userId,
+                'name' => $request->input('name'),
             ],
             [
-                'qty' => DB::raw("qty + $quantity") // زيادة الكمية إذا كان المنتج موجودًا
+                'name' => $request->input('name'),
+                'qty' => DB::raw("qty + $quantity"),
             ]
         );
 

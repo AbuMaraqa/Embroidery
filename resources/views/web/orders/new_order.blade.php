@@ -140,5 +140,23 @@
                 }
             });
         }
+
+        function update_name(product_id,name){
+            $.ajax({
+                url: '{{ route('orders.update_name') }}',
+                type: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
+                    name:name,
+                    id:product_id
+                },
+                success: function(response) {
+                    cart_order_ajax();
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
     </script>
 @endsection

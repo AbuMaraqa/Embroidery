@@ -98,6 +98,7 @@ class OrdersController extends Controller
             $orderItem->product_id = $cartItem->product_id;
             $orderItem->qty = $cartItem->qty;
             $orderItem->price = $cartItem->product->product_price * $cartItem->qty;
+            $orderItem->name = $cartItem->name;
             $orderItem->save();
 
             $find_user = ProductModel::where('id', $cartItem->product_id)->first();
@@ -152,6 +153,29 @@ class OrdersController extends Controller
         $sessionId = session()->getId();
         $data = CartModel::find($request->id);
         $data->qty = $request->qty;
+        $data->save();
+        // $cartItems = CartModel::with('product')
+        //     ->where(function ($query) use ($sessionId) {
+        //         $query->where('session_id', $sessionId);
+        //         if (auth()->check()) {
+        //             $query->orWhere('user_id', auth()->id());
+        //         }
+        //     })
+        //     ->get();
+        // $totalPrice = $cartItems->sum(function ($cartItem) {
+        //     return $cartItem->product->product_price * $cartItem->qty;
+        // });
+        return response()->json([
+            'success' => true,
+            // 'view'=> view('web.orders.ajax.cart_order',['cartItems' => $cartItems, 'category' => $category, 'totalPrice' => $totalPrice])->render()
+        ]);
+    }
+
+    public function update_name(Request $request)
+    {
+        $sessionId = session()->getId();
+        $data = CartModel::find($request->id);
+        $data->name = $request->name;
         $data->save();
         // $cartItems = CartModel::with('product')
         //     ->where(function ($query) use ($sessionId) {

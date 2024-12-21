@@ -17,7 +17,8 @@
                                 <p class="card-text">{{ $key->user->name}}</p>
                                 @endif
                                 <p class="card-text"><span>₪</span><span>{{ $key->product->product_price}}</span></p>
-                                <button type="submit" class="btn btn-danger">ازالة من السلة</button>
+                                <input type="text" readonly class="form-control" value="{{ $key->name}}">
+                                <button type="submit" class="btn btn-danger mt-3">ازالة من السلة</button>
                                 </div>
                             </div>
                         </form>
