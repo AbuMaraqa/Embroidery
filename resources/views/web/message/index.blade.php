@@ -15,8 +15,8 @@
                         @else
                             @foreach ($data as $key)
                                 @if ($key->sender == auth()->user()->id)
-                                    <div class="col-md-6">
-                                        {{ $key->message }}
+                                    <div class="col-md-6 mt-2">
+                                        <input type="text" class="form-control" readonly value="{{ $key->message }}">
                                     </div>
                                     <div class="col-md-6">
 
@@ -25,8 +25,8 @@
                                     <div class="col-md-6">
 
                                     </div>
-                                    <div class="col-md-6">
-                                        {{ $key->message }}
+                                    <div class="col-md-6 mt-2">
+                                        <input type="text" class="form-control" readonly value="{{ $key->message }}">
                                     </div>
                                 @endif
                             @endforeach
