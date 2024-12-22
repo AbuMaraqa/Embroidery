@@ -36,6 +36,18 @@
             border-color: #4d0800;
             color: #fff;
         }
+
+        .btn-success{
+            background-color: #4d0800;
+            border-color: #4d0800;
+            color: #fff;
+        }
+
+        .btn-success:hover{
+            background-color: #050100;
+            border-color: #4d0800;
+            color: #fff;
+        }
     </style>
 </head>
 
