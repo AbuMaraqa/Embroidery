@@ -74,45 +74,47 @@
             <div class="col-md-12">
                 <h4>لا يوجد منتجات</h4>
             </div>
-            @else
+        @else
             @foreach ($products as $key)
-            <form class="col-md-3 mb-4" action="{{ route('cart.addToCart') }}" method="post">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $key->id }}">
-                <div class="card" style="width: 18rem;">
-                    <a href="{{ route('product.index', ['id' => $key->id]) }}">
-                        <img style="max-height: 300px;min-height: 300px"
-                            src="{{ asset('storage/product/' . $key->product_image) }}" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $key->product_name }}</h5>
-                        <p class="card-text">{{ $key->user->name ?? '' }}</p>
-                        <p class="card-text"><span>₪</span><span>{{ $key->product_price }}</span></p>
-                        {{-- <input type="text" class="form-control" placeholder="اكتب اسمك" name="name"> --}}
-                        <button class="btn btn-dark mt-3">اضافة للسلة</button>
-                    </div>
-                </div>
-            </form>
-        @endforeach
-
+                @if ($key->status == 1)
+                    <form class="col-md-3 mb-4" action="{{ route('cart.addToCart') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $key->id }}">
+                        <div class="card" style="width: 18rem;">
+                            <a href="{{ route('product.index', ['id' => $key->id]) }}">
+                                <img style="max-height: 300px;min-height: 300px"
+                                    src="{{ asset('storage/product/' . $key->product_image) }}" class="card-img-top"
+                                    alt="...">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $key->product_name }}</h5>
+                                <p class="card-text">{{ $key->user->name ?? '' }}</p>
+                                <p class="card-text"><span>₪</span><span>{{ $key->product_price }}</span></p>
+                                {{-- <input type="text" class="form-control" placeholder="اكتب اسمك" name="name"> --}}
+                                <button class="btn btn-primary mt-3">اضافة للسلة</button>
+                            </div>
+                        </div>
+                    </form>
+                @endif
+            @endforeach
         @endif
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-body p-0 text-center">
                     <div class="text-center p-3" style="height: 400px;background-color: #CAA184;border-radius: 5px">
-                        <img style="width: 130px" class="mt-2" src="{{ asset('img/logo.png')}}" alt="">
+                        <img style="width: 130px" class="mt-2" src="{{ asset('img/logo.png') }}" alt="">
                         <div>
                             <p style="color: #4D0800;font-size: 25px" class="mt-3">
                                 في قلب التراث الفلسطيني، ينبض التطريز كحكاية
- تُسرد بالخيوط والألوان، حكاية تجمع بين الأصالة والهوية.
- موقعنا يهدف إلى إحياء هذا الفن العريق، ليكون بوابتك
- إلى عالم التطريزالفلسطيني بكل ما يحمله من تفاصيل
- أصيلة وجمال فريد.
+                                تُسرد بالخيوط والألوان، حكاية تجمع بين الأصالة والهوية.
+                                موقعنا يهدف إلى إحياء هذا الفن العريق، ليكون بوابتك
+                                إلى عالم التطريزالفلسطيني بكل ما يحمله من تفاصيل
+                                أصيلة وجمال فريد.
                             </p>
                         </div>
                     </div>
@@ -124,7 +126,21 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#exampleModalLong').modal('show');
+            // مفتاح التخزين المحلي
+            const modalKey = 'modalShown';
+
+            // احصل على الوقت الحالي
+            const now = new Date().getTime();
+
+            // تحقق مما إذا كان المفتاح موجودًا في التخزين المحلي
+            const lastShown = localStorage.getItem(modalKey);
+
+            // إذا لم يتم عرضه من قبل أو انقضت ساعة على الأقل
+            if (!lastShown || (now - lastShown > 1800000)) { // 3600000 = ساعة واحدة بالميلي ثانية
+                $('#exampleModalLong').modal('show');
+                // تخزين الوقت الحالي في التخزين المحلي
+                localStorage.setItem(modalKey, now);
+            }
         });
 
         $('.carousel').carousel({

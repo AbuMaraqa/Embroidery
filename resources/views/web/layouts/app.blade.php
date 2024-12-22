@@ -24,6 +24,18 @@
             font-family: 'Tajawal';
             src: url('{{ asset('assets/admin/fonts/Tajawal/Tajawal-Regular.ttf') }}');
         }
+
+        .btn-primary{
+            background-color: #4d0800;
+            border-color: #4d0800;
+            color: #fff;
+        }
+
+        .btn-primary:hover{
+            background-color: #050100;
+            border-color: #4d0800;
+            color: #fff;
+        }
     </style>
 </head>
 

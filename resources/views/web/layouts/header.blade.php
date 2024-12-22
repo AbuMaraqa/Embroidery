@@ -39,9 +39,9 @@
         </div>
         <div class="row p-3 justify-content-center align-items-center">
             @foreach ($category as $key)
-                <div class="col-1">
+                <div class="col-3">
                     <li class="nav-item dropdown" style="list-style-type:none;">
-                        <a class="nav-link" href="{{ route('category.index', ['id'=>$key->id])}}">
+                        <a class="nav-link btn btn-primary" href="{{ route('category.index', ['id'=>$key->id])}}">
                             {{ $key->category_name }}
                         </a>
                         {{-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
