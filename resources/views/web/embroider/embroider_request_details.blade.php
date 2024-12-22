@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-dm-12">
-        <h4 class="text-center mt-3 mb-3">تفاصيل منشور</h4>
+        <h4 class="text-center mt-3 mb-3">تفاصيل الردود</h4>
     </div>
 </div>
 
