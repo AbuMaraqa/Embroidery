@@ -7,7 +7,7 @@
 </div>
 
 @if ($data->isEmpty())
-    <p class="text-center">لا توجد منشورات</p>
+    <p class="text-center">لا توجد ردود</p>
 @else
     @foreach ($data as $key)
         <div class="row">
