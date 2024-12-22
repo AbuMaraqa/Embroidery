@@ -12,7 +12,7 @@
                   <h5 class="card-title">{{ $key->product_name}}</h5>
                   <p class="card-text">{{ $key->user->name ?? ''}}</p>
                   <p class="card-text"><span>₪</span><span>{{ $key->product_price}}</span></p>
-                  <td><input onchange="update_name({{ $key->id }},this.value)" type="text" class="form-control w-50" placeholder="اكتب اسمك" value="{{ $key->name }}"></td>
+                  {{-- <td><input onchange="update_name({{ $key->id }},this.value)" type="text" class="form-control w-50" placeholder="اكتب اسمك" value="{{ $key->name }}"></td> --}}
                   <button type="submit" class="btn btn-dark mt-3">اضافة للسلة</button>
                 </div>
             </div>

@@ -12,7 +12,9 @@
                     <img style="width: 40px" src="{{ asset('storage/product/'.$key->product->product_image)}}" alt="">
                 </td>
                 <td>{{ $key->product->product_name }}</td>
-                <td><input onchange="update_name({{ $key->id }},this.value)" type="text" class="form-control w-50" placeholder="اكتب اسمك" value="{{ $key->name }}"></td>
+                <td>
+                    <textarea onchange="update_name({{ $key->id }},this.value)" name="" class="form-control w-50" id="" cols="30" rows="2">{{ $key->name }}</textarea>
+                </td>
                 <td><input type="number" onchange="update_qty({{ $key->id }},this.value)" value="{{ $key->qty }}" placeholder="الكمية" class="form-control w-25"></td>
                 <td>{{ $key->product->product_price * $key->qty }} <span>₪</span></td>
             </tr>
