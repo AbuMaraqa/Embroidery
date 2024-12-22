@@ -39,7 +39,7 @@
         </div>
         <div class="row p-3 justify-content-center align-items-center">
             @foreach ($category as $key)
-                <div class="col-3">
+                <div class="col-2 mt-2">
                     <li class="nav-item dropdown" style="list-style-type:none;">
                         <a class="nav-link btn btn-primary" href="{{ route('category.index', ['id'=>$key->id])}}">
                             {{ $key->category_name }}
