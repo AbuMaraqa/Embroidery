@@ -117,6 +117,9 @@ Route::group(['middleware' => ['auth' , 'checkuserstatus'] , 'prefix' => 'admin'
         Route::get('/order_details/{id}', [App\Http\Controllers\admin\OrdersController::class, 'order_details'])->name('admin.orders.order_details');
         Route::post('/update_product_status', [App\Http\Controllers\admin\OrdersController::class, 'update_product_status'])->name('admin.orders.update_product_status');
     });
+    Route::group(['prefix' => 'request'], function () {
+        Route::get('/index', [App\Http\Controllers\admin\EmbroiderRequestDetailsController::class, 'index'])->name('admin.orders.index');
+    });
 });
 
 

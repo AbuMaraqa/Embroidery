@@ -37,6 +37,13 @@
                         </div>
                         <div class="col-md-12 mt-3">
                             <div class="form-group">
+                                <label for="">رقم الهاتف</label>
+                                <input required type="number" value="{{ $users->phone }}" name="phone"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="form-group">
                                 <label for="">كلمة المرور القديمة</label>
                                 <input type="old_password" name="old_password" class="form-control">
                             </div>

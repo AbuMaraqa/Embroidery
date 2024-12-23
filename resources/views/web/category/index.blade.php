@@ -1,8 +1,10 @@
 @extends('web.layouts.app')
 @section('content')
+
 <div class="row">
     <div class="row m-3">
         @foreach ($data as $key)
+        @if ($key->status == 1)
         <form class="col-md-3" action="{{ route('cart.addToCart') }}" method="post">
             @csrf
             <input type="hidden" value="{{ $key->id }}" name="product_id">
@@ -17,6 +19,8 @@
                 </div>
             </div>
         </form>
+
+        @endif
         @endforeach
     </div>
 </div>

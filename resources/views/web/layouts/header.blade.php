@@ -41,7 +41,7 @@
             @foreach ($category as $key)
                 <div class="col-2 mt-2">
                     <li class="nav-item dropdown" style="list-style-type:none;">
-                        <a class="nav-link btn btn-primary" href="{{ route('category.index', ['id'=>$key->id])}}">
+                        <a class="nav-link btn btn-primary" style="height: 50px;justify-items:center;align-content:center" href="{{ route('category.index', ['id'=>$key->id])}}">
                             {{ $key->category_name }}
                         </a>
                         {{-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

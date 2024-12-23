@@ -24,7 +24,7 @@
         <h3>تفاصيل الطلب</h3>
     </div>
 </div>
-<div class="row mt-4">
+<div class="row mt-4 mb-4">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
@@ -32,6 +32,13 @@
                     <div class="col-md-12">
                         <form class="row" action="{{ route('orders.processPayment')}}" method="post">
                             @csrf
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <p class="text-danger">لتغيير رقم الهاتف من المعلومات الشخصية</p>
+                                    <label for="">رقم الهاتف الخاص بك</label>
+                                    <input value="{{ auth()->user()->phone }}" required type="number" name="phone" class="form-control">
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">العنوان</label>

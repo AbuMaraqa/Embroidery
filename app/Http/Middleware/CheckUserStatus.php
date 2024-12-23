@@ -16,7 +16,7 @@ class CheckUserStatus
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->user_role === 'embroider' && Auth::user()->user_status === 'inactive') {
+        if ((Auth::check() && Auth::user()->user_role === 'embroider' || Auth::check() && Auth::user()->user_role === 'client') && Auth::user()->user_status === 'inactive') {
             return response('هذا المستخدم غير فعال', 404)
             ->header('Content-Type', 'text/plain; charset=utf-8');
         }
