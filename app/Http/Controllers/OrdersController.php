@@ -88,6 +88,7 @@ class OrdersController extends Controller
         $order->payment_status = 1;
         $order->total_price = $totalPrice;
         $order->address = $request->address;
+        $order->phone = $request->phone;
         $order->shipping_method = $request->shipping_method;
         $order->save();
 
