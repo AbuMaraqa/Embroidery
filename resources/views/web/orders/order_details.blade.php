@@ -59,7 +59,13 @@
                                         <td colspan="6" class="text-center">لا يوجد بيانات</td"></td>
                                     </tr>
                                     @else
+                                    @php
+                                        $total = 0;
+                                    @endphp
                                     @foreach ($data->order_items as $key)
+                                    @php
+                                        $total = $total + ($key->qty * $key->price);
+                                    @endphp
                                     <tr>
                                         <td>
                                             @if ($key->status == 'pending')
@@ -78,7 +84,7 @@
                                 @endif
                                 <tr>
                                     <td colspan="5" class="text-center bg-dark text-white">المجموع</td>
-                                    <td>{{ $data->total_price }} <span>₪</span></td>
+                                    <td>{{ $total }} <span>₪</span></td>
                                 </tr>
                             </tbody>
                         </table>

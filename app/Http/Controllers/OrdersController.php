@@ -84,6 +84,7 @@ class OrdersController extends Controller
         // إنشاء الطلب
         $order = new OrdersModel();
         $order->user_id = auth()->user()->id;
+        $order->shipping_id = $request->shipping_method;
         $order->order_status = 1;
         $order->payment_status = 1;
         $order->total_price = $totalPrice;
