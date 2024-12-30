@@ -99,7 +99,8 @@ class OrdersController extends Controller
             $orderItem->order_id = $order->id;
             $orderItem->product_id = $cartItem->product_id;
             $orderItem->qty = $cartItem->qty;
-            $orderItem->price = $cartItem->product->product_price * $cartItem->qty;
+            // $orderItem->price = $cartItem->product->product_price * $cartItem->qty;
+            $orderItem->price = $cartItem->product->product_price;
             $orderItem->name = $cartItem->name;
             $orderItem->save();
 
